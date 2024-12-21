@@ -97,7 +97,6 @@ function App() {
 	// Fetch data on page load
 	useEffect(() => {
 		get("auth", setAuth, "auth", false)
-		get("configurations", setConfiguration, "configurations", false)
 }, [])
 
 	/*
@@ -133,13 +132,13 @@ function App() {
 	 *
 	 * Register service worker */
 	if (window.location.href.match(/https/)) {
-		// if ("serviceWorker" in navigator) {
-		// 	window.addEventListener("load", () => {
-		// 		navigator.serviceWorker.register("/sw.js")
-		// 		// .then((reg) => console.log('Service worker registered', reg))
-		// 		// .catch((err) => console.log('Service worker not registered', err));
-		// 	})
-		// }
+		if ("serviceWorker" in navigator) {
+			window.addEventListener("load", () => {
+				navigator.serviceWorker.register("/sw.js")
+				// .then((reg) => console.log('Service worker registered', reg))
+				// .catch((err) => console.log('Service worker not registered', err));
+			})
+		}
 	}
 
 	/*

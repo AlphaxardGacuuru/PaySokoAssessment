@@ -5,7 +5,9 @@ use App\Http\Controllers\FilePondController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MPESATransactionController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +30,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('auth', [UserController::class, 'auth']);
 
 Route::apiResources([
+    "products" => ProductController::class,
+    "orders" => OrderController::class,
     "invoices" => InvoiceController::class,
     "mpesa-transactions" => MPESATransactionController::class,
     "payments" => PaymentController::class,

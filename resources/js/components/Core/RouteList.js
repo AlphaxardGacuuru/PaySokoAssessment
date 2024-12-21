@@ -5,6 +5,8 @@ import Index from "@/pages/index"
 
 import Nav from "@/components/Layouts/Nav"
 
+import Products from "@/pages/products/index"
+
 import Invoices from "@/pages/invoices/index"
 import InvoiceCreate from "@/pages/invoices/create"
 import InvoiceView from "@/pages/invoices/[id]"
@@ -19,6 +21,10 @@ const RouteList = ({ GLOBAL_STATE }) => {
 		{
 			path: "/",
 			component: <Index {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/products",
+			component: <Products {...GLOBAL_STATE} />,
 		},
 		{
 			path: "/invoices",
