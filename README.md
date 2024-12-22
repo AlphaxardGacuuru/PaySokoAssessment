@@ -15,12 +15,20 @@ This a Full Stack web application with a React frontend and Laravel REST API usi
 
  that allows users to:
 
-- Log into the system.
+- Register and Log into the system.
 - View available products.
 - Add and remove items from cart.
 - Place an order.
-- Pay for an order.
 - View orders.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+To setup the frontend of the application run on one bash terminal:
 
+- sh install-frontend.sh.
+
+To setup the backend of the application run on another bash terminal:
+
+- sh install-backend.sh.
+
+To test run:
+
+- php artisan test
