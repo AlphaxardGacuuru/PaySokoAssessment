@@ -57,60 +57,64 @@ const index = (props) => {
 			<div className="col-sm-12">
 				<div className="d-flex flex-wrap">
 					{/* Product List Start */}
-					{products.map((product, key) => (
-						<div
-							key={key}
-							className="card m-1 p-1"
-							style={{ width: "16em", height: "17em" }}>
-							<Img
-								src={product.thumbnail}
-								className="rounded"
-								style={{ width: "16em", height: "10em", objectFit: "cover" }}
-							/>
-							<h6
-								className="text-nowrap text-clip text mt-1"
-								style={{ maxWidth: "8em" }}>
-								{product.name}
-							</h6>
-							<div className="d-flex justify-content-between my-1">
-								<h6 className="text-success">KES {product.price}</h6>
-								{/* Sales Start */}
-								<h6>
-									<span className="me-1">
-										<InventorySVG />
-									</span>
-									{product.inventory}
+					{products.length > 0 ? (<React.Fragment>
+						{products.map((product, key) => (
+							<div
+								key={key}
+								className="card m-1 p-1"
+								style={{ width: "16em", height: "17em" }}>
+								<Img
+									src={product.thumbnail}
+									className="rounded"
+									style={{ width: "16em", height: "10em", objectFit: "cover" }}
+								/>
+								<h6
+									className="text-nowrap text-clip text mt-1"
+									style={{ maxWidth: "8em" }}>
+									{product.name}
 								</h6>
-								{/* Sales End */}
-							</div>
+								<div className="d-flex justify-content-between my-1">
+									<h6 className="text-success">KES {product.price}</h6>
+									{/* Sales Start */}
+									<h6>
+										<span className="me-1">
+											<InventorySVG />
+										</span>
+										{product.inventory}
+									</h6>
+									{/* Sales End */}
+								</div>
 
-							<hr className="m-2" />
+								<hr className="m-2" />
 
-							{/* Cart Start */}
-							<Btn
-								icon={
-									product.inCart ? (
-										<>
+								{/* Cart Start */}
+								<Btn
+									icon={
+										product.inCart ? (
+											<>
+												<CartSVG />
+												<span className="fs-5">
+													<CheckSVG />
+												</span>
+											</>
+										) : (
 											<CartSVG />
-											<span className="fs-5">
-												<CheckSVG />
-											</span>
-										</>
-									) : (
-										<CartSVG />
-									)
-								}
-								className={product.inCart ? "btn-2" : "btn-3"}
-								onClick={() =>
-									product.inCart
-										? deleteFromCart(product.id)
-										: addToCart(product.id)
-								}
-								loading={loading.includes(product.id)}
-							/>
-							{/* Cart End */}
-						</div>
-					))}
+										)
+									}
+									className={product.inCart ? "btn-2" : "btn-3"}
+									onClick={() =>
+										product.inCart
+											? deleteFromCart(product.id)
+											: addToCart(product.id)
+									}
+									loading={loading.includes(product.id)}
+								/>
+								{/* Cart End */}
+							</div>
+						))}
+					</React.Fragment>) : (
+						<h2>No products to display</h2>
+					)}
 					{/* Product List End */}
 				</div>
 			</div>

@@ -82744,7 +82744,7 @@ var index = function index(props) {
     className: "col-sm-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
     className: "d-flex flex-wrap"
-  }, products.map(function (product, key) {
+  }, products.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_7___default.a.Fragment, null, products.map(function (product, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
       key: key,
       className: "card m-1 p-1",
@@ -82783,7 +82783,7 @@ var index = function index(props) {
       },
       loading: loading.includes(product.id)
     }));
-  }))));
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h2", null, "No products to display"))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (index);
 
