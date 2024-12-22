@@ -17,6 +17,7 @@ import ServiceProviderSVG from "@/svgs/ServiceProviderSVG"
 import SettingsSVG from "@/svgs/SettingsSVG"
 import DocumentsSVG from "@/svgs/DocumentsSVG"
 import PaperSVG from "@/svgs/PaperSVG"
+import CartSVG from "@/svgs/CartSVG"
 
 const AdminNavLinks = (props) => {
 	const location = useLocation()
@@ -64,6 +65,30 @@ const AdminNavLinks = (props) => {
 				</Link>
 			</li>
 			{/* Products Link End */}
+			{/* Cart Link */}
+			<li className="nav-item">
+				<Link
+					to={`/cart`}
+					className={`nav-link my-1 ${active("/cart")}`}>
+					<div className="nav-link-icon">
+						<CartSVG />
+					</div>
+					<div className="nav-link-text">Cart</div>
+				</Link>
+			</li>
+			{/* Cart Link End */}
+			{/* Orders Link */}
+			<li className="nav-item">
+				<Link
+					to={`/orders`}
+					className={`nav-link my-1 ${active("/orders")}`}>
+					<div className="nav-link-icon">
+						<GoodSVG />
+					</div>
+					<div className="nav-link-text">Orders</div>
+				</Link>
+			</li>
+			{/* Orders Link End */}
 		</React.Fragment>
 	)
 }

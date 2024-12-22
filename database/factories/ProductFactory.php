@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'name' => fake()->name(),
             "description" => fake()->realTextBetween($minNbChars = 160, $maxNbChars = 200, $indexSize = 2),
 			"price" => fake()->randomFloat($nbMaxDecimals = 2, $min = 100, $max = 1000) * 100,
-			"sales" => fake()->randomNumber($nbDigits = 2),
+			"inventory" => fake()->randomNumber($nbDigits = 2),
         ];
     }
 }

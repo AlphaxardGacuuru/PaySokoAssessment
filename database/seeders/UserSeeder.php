@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $brianDoesntExist = User::where('email', 'alphaxardgacuuru47@gmail.com')
+        $alDoesntExist = User::where('email', 'alphaxardgacuuru47@gmail.com')
             ->doesntExist();
 
         $gacuuruDoesntExist = User::where('email', 'gacuuruwakarenge@gmail.com')
@@ -23,8 +23,8 @@ class UserSeeder extends Seeder
         $cikuDoesntExist = User::where('email', 'cikumuhandi@gmail.com')
             ->doesntExist();
 
-        if ($brianDoesntExist) {
-            User::factory()->brian()->create();
+        if ($alDoesntExist) {
+            User::factory()->al()->create();
         }
 
         if ($gacuuruDoesntExist) {
@@ -36,8 +36,5 @@ class UserSeeder extends Seeder
         }
 
         User::factory()->count(10)->create();
-        User::factory()->count(10)->create(["account_type" => "supplier"]);
-        User::factory()->count(10)->create(["account_type" => "client"]);
-        User::factory()->count(10)->create(["account_type" => "service provider"]);
     }
 }

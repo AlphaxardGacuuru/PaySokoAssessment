@@ -12,7 +12,7 @@ class ProductService extends Service
      */
     public function index($request)
     {
-        $productsQuery = new Product;
+        $productsQuery = Product::where("inventory", ">", 0);
 
         $productsQuery = $this->search($productsQuery, $request);
 

@@ -34,18 +34,9 @@ Route::apiResources([
     "products" => ProductController::class,
 	"cart" => CartController::class,
     "orders" => OrderController::class,
-    "invoices" => InvoiceController::class,
-    "mpesa-transactions" => MPESATransactionController::class,
-    "payments" => PaymentController::class,
     "users" => UserController::class,
     'notifications' => NotificationController::class,
 ]);
-
-/*
- * Dashboard
- */
-Route::get("dashboard/{id}", [DashboardController::class, "index"]);
-Route::get("dashboard/properties/{id}", [DashboardController::class, "properties"]);
 
 // Kopokopo STK Push
 Route::post("stk-push", [MPESATransactionController::class, 'stkPush']);

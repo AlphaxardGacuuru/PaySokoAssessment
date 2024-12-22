@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use App\Http\Controllers\Controller;
+use App\Http\Services\OrderService;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function __construct(protected OrderService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**
@@ -36,7 +42,13 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$status, $message, $order] = $this->service->store($request);
+
+        return response([
+            "status" => $status,
+            "message" => $message,
+            "data" => $order,
+        ], 200);
     }
 
     /**
@@ -45,10 +57,10 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
-    {
-        //
-    }
+    public function show($id)
+	{
+		return $this->service->show($id);
+	}
 
     /**
      * Show the form for editing the specified resource.
@@ -79,8 +91,14 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        [$status, $message, $order] = $this->service->destroy($id);
+
+        return response([
+            "status" => $status,
+            "message" => $message,
+            "data" => $order,
+        ], 200);
     }
 }

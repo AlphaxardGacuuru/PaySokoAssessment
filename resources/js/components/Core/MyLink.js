@@ -6,13 +6,7 @@ const MyLink = ({ linkTo, text, icon, className }) => {
 
 	return (
 		<Link
-			to={`${
-				location.pathname.match("/admin/")
-					? "/admin"
-					: location.pathname.match("/instructor/")
-					? "/instructor"
-					: "/student"
-			}${linkTo}`}
+			to={linkTo}
 			className={`btn mysonar-btn ${className}`}>
 			<span>{icon}</span>
 			{text && <span className="mx-1">{text}</span>}

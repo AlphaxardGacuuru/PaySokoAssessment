@@ -3,6 +3,7 @@ import Img from "@/components/Core/Img"
 import CartSVG from "@/svgs/CartSVG"
 import CheckSVG from "@/svgs/CheckSVG"
 import GoodSVG from "@/svgs/GoodSVG"
+import InventorySVG from "@/svgs/InventorySVG"
 import SalesSVG from "@/svgs/SalesSVG"
 import React, { useEffect, useState } from "react"
 
@@ -26,6 +27,7 @@ const index = (props) => {
 				setLoading(loading.filter((id) => id !== productId))
 				props.setMessages([res.data.message])
 				props.get("products", setProducts, "products")
+				props.get("cart", props.setCart, "cart")
 			})
 			.catch((err) => {
 				setLoading(loading.filter((id) => id !== productId))
@@ -36,12 +38,13 @@ const index = (props) => {
 	const deleteFromCart = (productId) => {
 		setLoading([...loading, productId])
 
-		Axios.delete(`/api/cart/${productId}`, { productId: productId })
+		Axios.delete(`/api/cart/${productId}`)
 			.then((res) => {
 				// Remove loader
 				setLoading(loading.filter((id) => id !== productId))
 				props.setMessages([res.data.message])
 				props.get("products", setProducts, "products")
+				props.get("cart", props.setCart, "cart")
 			})
 			.catch((err) => {
 				setLoading(loading.filter((id) => id !== productId))
@@ -74,9 +77,9 @@ const index = (props) => {
 								{/* Sales Start */}
 								<h6>
 									<span className="me-1">
-										<SalesSVG />
+										<InventorySVG />
 									</span>
-									{product.sales}
+									{product.inventory}
 								</h6>
 								{/* Sales End */}
 							</div>

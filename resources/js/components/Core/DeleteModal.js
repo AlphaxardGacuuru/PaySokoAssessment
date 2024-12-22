@@ -55,7 +55,7 @@ const DeleteModal = ({ index, model, modelName, onDelete }) => {
 			{/* Button trigger modal */}
 			<Btn
 				icon={<DeleteSVG />}
-				text="delete"
+				text="cancel order"
 				dataBsToggle="modal"
 				dataBsTarget={`#deleteModal${index}`}
 				onClick={(e) => e.preventDefault()}

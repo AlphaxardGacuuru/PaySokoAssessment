@@ -7,14 +7,12 @@ import Nav from "@/components/Layouts/Nav"
 
 import Products from "@/pages/products/index"
 
-import Invoices from "@/pages/invoices/index"
-import InvoiceCreate from "@/pages/invoices/create"
-import InvoiceView from "@/pages/invoices/[id]"
-import InvoiceEdit from "@/pages/invoices/edit/[id]"
+import Cart from "@/pages/cart/index"
 
-import Payments from "@/pages/payments/index"
-import PaymentCreate from "@/pages/payments/create"
-import PaymentEdit from "@/pages/payments/edit/[id]"
+import Orders from "@/pages/orders/index"
+import OrderCreate from "@/pages/orders/create"
+import OrderView from "@/pages/orders/[id]"
+import OrderEdit from "@/pages/orders/edit/[id]"
 
 const RouteList = ({ GLOBAL_STATE }) => {
 	const routes = [
@@ -27,33 +25,25 @@ const RouteList = ({ GLOBAL_STATE }) => {
 			component: <Products {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/invoices",
-			component: <Invoices {...GLOBAL_STATE} />,
+			path: "/cart",
+			component: <Cart {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/invoices/create",
-			component: <InvoiceCreate {...GLOBAL_STATE} />,
+			path: "/orders",
+			component: <Orders {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/invoices/:id/view",
-			component: <InvoiceView {...GLOBAL_STATE} />,
+			path: "/orders/create",
+			component: <OrderCreate {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/invoices/:id/edit",
-			component: <InvoiceEdit {...GLOBAL_STATE} />,
+			path: "/orders/:id/view",
+			component: <OrderView {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/payments",
-			component: <Payments {...GLOBAL_STATE} />,
-		},
-		{
-			path: "/payments/:id/create",
-			component: <PaymentCreate {...GLOBAL_STATE} />,
-		},
-		{
-			path: "/payments/:id/edit",
-			component: <PaymentEdit {...GLOBAL_STATE} />,
-		},
+			path: "/orders/:id/edit",
+			component: <OrderEdit {...GLOBAL_STATE} />,
+		}
 	]
 
 	return (

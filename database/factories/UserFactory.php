@@ -56,15 +56,15 @@ class UserFactory extends Factory
      *
      * @return static
      */
-    public function brian()
+    public function al()
     {
         return $this->state(fn(array $attributes) => [
             'name' => 'Brian',
-            'email' => 'brian@marcusmiles.co.ke',
+            'email' => 'alphaxardgacuuru47@gmail.com',
             'email_verified_at' => now(),
             'avatar' => 'avatars/male-avatar.png',
             'phone' => '0722641161',
-            'password' => Hash::make('brian@marcusmiles.co.ke'),
+            'password' => Hash::make('alphaxardgacuuru47@gmail.com'),
             'remember_token' => Str::random(10),
             'gender' => 'male',
         ]);

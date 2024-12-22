@@ -21,7 +21,6 @@ const AdminMenu = (props) => {
 	const location = useLocation()
 	const router = useHistory()
 
-	const [cart, setCart] = useState([])
 	const [notifications, setNotifications] = useState([])
 
 	const [bottomMenu, setBottomMenu] = useState()
@@ -43,7 +42,6 @@ const AdminMenu = (props) => {
 	useEffect(() => {
 		if (props.auth.name != "Guest") {
 			props.get("notifications", setNotifications, null, false)
-			props.get("cart", setCart, "cart", false)
 		}
 	}, [])
 
@@ -167,7 +165,7 @@ const AdminMenu = (props) => {
 														<span
 															className="position-absolute start-200 translate-middle badge rounded-circle bg-danger fw-lighter px-1"
 															style={{ fontSize: "0.6em", top: "0.2em" }}>
-															{cart.length > 0 && cart.length}
+															{props.cart.length > 0 && props.cart.length}
 														</span>
 													</Link>
 												</div>

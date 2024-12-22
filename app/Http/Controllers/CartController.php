@@ -22,10 +22,6 @@ class CartController extends Controller
      */
     public function index()
     {
-        // Redis::set("name", "Alphaxard");
-
-        // $data = Redis::get("name");
-
         $cart = $this->service->index();
 
 		return response([
@@ -53,6 +49,10 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+		$this->validate($request, [
+			"productId" => "required|integer",
+		]);
+
 		[$saved, $message, $cart] = $this->service->store($request);
 
         return response([
@@ -104,6 +104,12 @@ class CartController extends Controller
      */
     public function destroy($productId)
     {
-        $this->service->destroy($productId);
+		[$saved, $message, $cart] = $this->service->destroy($productId);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $cart,
+        ], 200);
     }
 }

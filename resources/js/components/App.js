@@ -52,6 +52,7 @@ function App() {
 	const [headerMenu, setHeaderMenu] = useState()
 	const [adminMenu, setAdminMenu] = useState("left-open")
 	const [page, setPage] = useState({ name: "/", path: [] })
+	const [cart, setCart] = useState([])
 
 	const [configuration, setConfiguration] = useState({})
 
@@ -97,7 +98,8 @@ function App() {
 	// Fetch data on page load
 	useEffect(() => {
 		get("auth", setAuth, "auth", false)
-}, [])
+		get("cart", setCart, "cart", false)
+	}, [])
 
 	/*
 	 * Genereate Month and Year Arrays
@@ -196,6 +198,8 @@ function App() {
 		setAdminMenu,
 		page,
 		setPage,
+		cart,
+		setCart,
 
 		// Date
 		currentDate,
@@ -204,7 +208,7 @@ function App() {
 		months,
 		years,
 		configuration,
-		setConfiguration
+		setConfiguration,
 	}
 
 	return (

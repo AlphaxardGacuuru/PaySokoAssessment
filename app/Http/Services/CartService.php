@@ -7,43 +7,47 @@ use Illuminate\Support\Facades\Cache;
 
 class CartService extends Service
 {
-	/*
-	* Get Cart Items
-	*/ 
-	public function index()
-	{
-		return Cache::get("cart");
-	}
+    /*
+     * Get Cart Items
+     */
+    public function index()
+    {
+        $cart = Cache::get('cart', collect());
 
-	/*
-	* Store Cart
-	*/
-	public function store($request)
-	{
-		$cart = Cache::get("cart") ?? collect([]);
+        $cart = $cart->values();
 
-		$product = Product::find($request->productId);
+        return $cart;
+    }
 
-		$cart->push($product);
+    /*
+     * Store Cart
+     */
+    public function store($request)
+    {
+        $cart = Cache::get("cart") ?? collect([]);
 
-		$saved = Cache::put("cart", $cart);
+        $product = Product::find($request->productId);
 
-		return [$saved, $product->name . " added to cart successfully", $cart];
-	}
+        $cart->push($product);
 
-	/*
-	* Delete Cart Item
-	*/ 
-	public function destroy($productId)
-	{
-		$cart = Cache::get("cart");
+        $saved = Cache::put("cart", $cart);
 
-		$cart = $cart->filter(function ($product) use ($productId) {
-			return $product->id != $productId;
-		});
+        return [$saved, $product->name . " added to cart successfully", $cart];
+    }
 
-		$saved = Cache::put("cart", $cart);
+    /*
+     * Delete Cart Item
+     */
+    public function destroy($productId)
+    {
+        $cart = Cache::get("cart");
 
-		return [$saved, "Product removed from cart successfully", $cart];
-	}
+        $cart = $cart->filter(function ($product) use ($productId) {
+            return $product->id != $productId;
+        });
+
+        $saved = Cache::put("cart", $cart);
+
+        return [$saved, "Product removed from cart successfully", $cart];
+    }
 }

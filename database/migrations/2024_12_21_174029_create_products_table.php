@@ -19,7 +19,7 @@ return new class extends Migration
 			$table->string("name");
 			$table->string("description")->nullable();
 			$table->string("price");
-			$table->string("sales")->default(0);
+			$table->string("inventory")->default(0);
             $table->timestamps();
         });
     }
