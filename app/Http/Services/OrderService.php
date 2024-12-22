@@ -44,6 +44,11 @@ class OrderService extends Service
 
         $products = Cache::get("cart");
 
+    // Handle an empty cart
+    if (is_null($products) || $products->isEmpty()) {
+        return [false, 'Cart is empty. Cannot create an order.', null];
+    }
+
         $order = new Order;
         $order->code = $code;
         $order->user_id = $this->id;
