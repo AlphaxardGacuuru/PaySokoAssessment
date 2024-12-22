@@ -2711,7 +2711,7 @@ ol {
 	z-index: 1;
 	/* min-width: 90px; */
 	height: 33px;
-	/* border: 1px solid; */
+	border: 1px solid rgba(96, 95, 103, 0.2);
 	/* border-color: #605F67; */
 	text-transform: uppercase;
 	color: rgba(96, 95, 103, 1);
@@ -2721,13 +2721,11 @@ ol {
 	line-height: 32px;
 	padding: 0 10px;
 	border-radius: 5px;
-
 	/* background: rgba(255, 255, 255, 0.2); */
 	box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 	/* For Safari support */
-	border: 1px solid rgba(96, 95, 103, 0.2);
 }
 
 .mysonar-btn:hover,
@@ -2741,6 +2739,14 @@ ol {
 	background-color: rgba(0, 0, 0, 0.8);
 	font-size: 12px;
 	color: rgba(255, 255, 255, 1);
+	border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.mysonar-btn.btn-3 {
+	/* background-color: rgba(255, 255, 255, 0.8); */
+	background-color: transparent;
+	font-size: 12px;
+	color: rgba(0, 0, 0, 1);
 }
 
 .mysonar-sm {

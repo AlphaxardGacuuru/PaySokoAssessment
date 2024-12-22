@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FilePondController;
 use App\Http\Controllers\InvoiceController;
@@ -31,6 +32,7 @@ Route::get('auth', [UserController::class, 'auth']);
 
 Route::apiResources([
     "products" => ProductController::class,
+	"cart" => CartController::class,
     "orders" => OrderController::class,
     "invoices" => InvoiceController::class,
     "mpesa-transactions" => MPESATransactionController::class,

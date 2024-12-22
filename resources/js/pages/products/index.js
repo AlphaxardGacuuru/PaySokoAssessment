@@ -1,6 +1,7 @@
 import Btn from "@/components/Core/Btn"
 import Img from "@/components/Core/Img"
 import CartSVG from "@/svgs/CartSVG"
+import CheckSVG from "@/svgs/CheckSVG"
 import GoodSVG from "@/svgs/GoodSVG"
 import SalesSVG from "@/svgs/SalesSVG"
 import React, { useEffect, useState } from "react"
@@ -8,26 +9,46 @@ import React, { useEffect, useState } from "react"
 const index = (props) => {
 	const [products, setProducts] = useState([])
 
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState([])
 
 	useEffect(() => {
+		// Set page
+		props.setPage({ name: "Products", path: ["products"] })
 		props.get("products", setProducts, "products")
 	}, [])
 
-	const addToCart = (id) => {
-		setLoading(true)
+	const addToCart = (productId) => {
+		setLoading([...loading, productId])
 
 		Axios.post(`/api/cart`, { productId: productId })
 			.then((res) => {
 				// Remove loader
-				setLoading(false)
+				setLoading(loading.filter((id) => id !== productId))
 				props.setMessages([res.data.message])
+				props.get("products", setProducts, "products")
 			})
 			.catch((err) => {
-				setLoading(false)
+				setLoading(loading.filter((id) => id !== productId))
 				props.getErrors(err, true)
 			})
 	}
+
+	const deleteFromCart = (productId) => {
+		setLoading([...loading, productId])
+
+		Axios.delete(`/api/cart/${productId}`, { productId: productId })
+			.then((res) => {
+				// Remove loader
+				setLoading(loading.filter((id) => id !== productId))
+				props.setMessages([res.data.message])
+				props.get("products", setProducts, "products")
+			})
+			.catch((err) => {
+				setLoading(loading.filter((id) => id !== productId))
+				props.getErrors(err, true)
+			})
+	}
+
 	return (
 		<div className="row">
 			<div className="col-sm-12">
@@ -37,11 +58,11 @@ const index = (props) => {
 						<div
 							key={key}
 							className="card m-1 p-1"
-							style={{ width: "15em", height: "17em" }}>
+							style={{ width: "16em", height: "17em" }}>
 							<Img
 								src={product.thumbnail}
 								className="rounded"
-								style={{ width: "15em", height: "10em", objectFit: "cover" }}
+								style={{ width: "16em", height: "10em", objectFit: "cover" }}
 							/>
 							<h6
 								className="text-nowrap text-clip text mt-1"
@@ -64,10 +85,25 @@ const index = (props) => {
 
 							{/* Cart Start */}
 							<Btn
-								icon={<CartSVG />}
-								className="btn-success"
-								onClick={() => addToCart(product.id)}
-								loading={loading}
+								icon={
+									product.inCart ? (
+										<>
+											<CartSVG />
+											<span className="fs-5">
+												<CheckSVG />
+											</span>
+										</>
+									) : (
+										<CartSVG />
+									)
+								}
+								className={product.inCart ? "btn-2" : "btn-3"}
+								onClick={() =>
+									product.inCart
+										? deleteFromCart(product.id)
+										: addToCart(product.id)
+								}
+								loading={loading.includes(product.id)}
 							/>
 							{/* Cart End */}
 						</div>
