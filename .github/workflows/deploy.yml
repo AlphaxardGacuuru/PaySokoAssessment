@@ -1,0 +1,70 @@
+name: CI/CD Pipeline for Laravel
+
+on:
+  push:
+    branches:
+      - main # Run the pipeline when code is pushed to the main branch
+  pull_request:
+    branches:
+      - main # Also run on pull requests to main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Install Composer Dependencies
+    - name: Install Composer dependencies
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+    # Step 3: Install NPM Packages
+    - name: Install NPM packages
+      run: npm install
+
+    # Step 4: Prepare Environment
+    - name: Set up environment file
+      run: cp .env.example .env
+
+    # Step 5: Run Migrations
+    - name: Run Migrations
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: ':memory:'
+      run: php artisan migrate --force
+
+    # Step 6: Run Tests
+    - name: Run Laravel Tests
+      run: php artisan test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build # Deployment only happens after the build passes
+
+    steps:
+    # Step 1: Check out code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Deploy to the server
+    - name: Deploy to Production Server
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        port: 22
+        script: |
+          cd /var/www/your-laravel-app
+          git pull origin main
+          composer install --no-dev --optimize-autoloader
+          npm install --production
+          php artisan migrate --force
+          php artisan cache:clear
+          php artisan config:cache
+          php artisan route:cache
+          php artisan queue:restart
+          sudo service php8.1-fpm restart
