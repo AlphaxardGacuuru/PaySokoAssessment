@@ -58,7 +58,7 @@ jobs:
         key: ${{ secrets.SERVER_SSH_KEY }}
         port: 22
         script: |
-          cd /var/www/your-laravel-app
+          cd /var/www/paysoko
           git pull origin main
           composer install --no-dev --optimize-autoloader
           npm install --production
