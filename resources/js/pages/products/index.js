@@ -8,7 +8,7 @@ import SalesSVG from "@/svgs/SalesSVG"
 import React, { useEffect, useState } from "react"
 
 const index = (props) => {
-	const [products, setProducts] = useState([])
+	const [products, setProducts] = useState(props.getLocalStorage("products"))
 
 	const [loading, setLoading] = useState([])
 

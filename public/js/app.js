@@ -82686,7 +82686,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var index = function index(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_7__["useState"])([]),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_7__["useState"])(props.getLocalStorage("products")),
     _useState2 = _slicedToArray(_useState, 2),
     products = _useState2[0],
     setProducts = _useState2[1];
