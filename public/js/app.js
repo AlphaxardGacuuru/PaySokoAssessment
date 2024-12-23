@@ -82783,7 +82783,9 @@ var index = function index(props) {
       },
       loading: loading.includes(product.id)
     }));
-  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h2", null, "No products to display"))));
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h2", {
+    className: "text-center text-muted w-100"
+  }, "No products to display"))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (index);
 

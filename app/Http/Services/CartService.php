@@ -14,7 +14,9 @@ class CartService extends Service
     {
         $cart = Cache::get('cart', collect());
 
-        $cart = $cart->values();
+        $cart = $cart
+			->filter(fn ($product) => $product->userId == $this->id)
+			->values();
 
         return $cart;
     }
@@ -27,6 +29,9 @@ class CartService extends Service
         $cart = Cache::get("cart") ?? collect([]);
 
         $product = Product::find($request->productId);
+
+        // Add User ID to the product
+        $product->userId = $this->id;
 
         $cart->push($product);
 
@@ -43,7 +48,7 @@ class CartService extends Service
         $cart = Cache::get("cart");
 
         $cart = $cart->filter(function ($product) use ($productId) {
-            return $product->id != $productId;
+            return $product->id != $productId && $product->userId == $this->id;
         });
 
         $saved = Cache::put("cart", $cart);
